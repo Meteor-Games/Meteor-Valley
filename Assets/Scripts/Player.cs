@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerMovement : MonoBehaviour
 {
     public Animator playerAnimator;
-    float imput_x = 0;
-    float imput_y = 0;
+    float input_x = 0;
+    float input_y = 0;
     bool isWalking = false;
     public float speed = 2.5f;
 
@@ -19,14 +20,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        imput_x = Input.GetAxisRaw("Horizontal");
-        imput_y= Input.GetAxisRaw("Vertical");
-        isWalking = (imput_x != 0 || imput_y != 0);
+        input_x = UnityEngine.Input.GetAxisRaw("Horizontal");
+        input_y = UnityEngine.Input.GetAxisRaw("Vertical");
+        isWalking = (input_x != 0 || input_y != 0);
 
         if (isWalking)
         {
-            var move = new Vector3(imput_x, imput_y, 0).normalized;
+            var move = new Vector3(input_x, input_y, 0).normalized;
             transform.position += move * speed * Time.deltaTime;
+            playerAnimator.SetFloat("input_x", input_x);
+            playerAnimator.SetFloat("input_y", input_y);
         }
+
+        playerAnimator.SetBool("isWalking", isWalking);
+
+        if (UnityEngine.Input.GetButton("Fire1"))
+            playerAnimator.SetTrigger("atack");
     }
+
 }
