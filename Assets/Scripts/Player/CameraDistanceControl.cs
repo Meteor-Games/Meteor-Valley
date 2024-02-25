@@ -32,6 +32,16 @@ public class CameraDistanceControl : MonoBehaviour
     // Função para ajustar o zoom da câmera
     void ZoomCamera(float zoomChange)
     {
+        float pre = (Cam.orthographicSize + zoomChange);
+        if (pre < minFov)
+        {
+            return;
+        }
+        if (pre > maxFov)
+        {
+            return;
+        }
         Cam.orthographicSize += zoomChange;
+        
     }
 }

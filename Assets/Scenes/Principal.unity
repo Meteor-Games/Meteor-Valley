@@ -38640,7 +38640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeCycleMinutes: 1
-  estacao: 2
+  estacao: 1
   GlobalLight: {fileID: 1338399985}
   time: 070000000000000000000000
 --- !u!4 &1000661166
