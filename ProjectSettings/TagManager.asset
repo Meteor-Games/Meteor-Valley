@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - player_inventory
+  - inventory_slot
+  - player_nav_inventory
   layers:
   - Default
   - TransparentFX
