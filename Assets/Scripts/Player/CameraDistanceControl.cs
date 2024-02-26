@@ -9,6 +9,16 @@ public class CameraDistanceControl : MonoBehaviour
 
     public Camera Cam;
 
+    public void Add()
+    {
+        ZoomCamera(zoomSpeed);
+    }
+
+    public void Remove() 
+    {
+        ZoomCamera(-zoomSpeed);
+    }
+
     private void Start()
     {
         Cam = GetComponent<Camera>();
