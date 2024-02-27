@@ -3,20 +3,34 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.Windows;
-
-public class PlayerMovement : MonoBehaviour
+using Unity.Netcode;
+public class PlayerMovement : NetworkBehaviour 
 {
     public Animator playerAnimator;
     float input_x = 0;
     float input_y = 0;
-    bool isWalking = false;
-    public float speed = 2.5f;
+    
+    [SerializeField]
+    private bool isWalking = false;
 
+    [Range(0,15f)]
+    public float speed = 2.5f;
     private void Start()
     {
+
         isWalking = false;
     }
 
+    public override void OnNetworkSpawn()
+    {
+        
+        if (!IsLocalPlayer)
+        {
+            Destroy(this);
+            return;
+        }
+        Debug.Log("is_player");
+    }
 
     private void Update()
     {
@@ -36,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (UnityEngine.Input.GetButton("Fire1"))
             playerAnimator.SetTrigger("atack");
+        
     }
 
 }
