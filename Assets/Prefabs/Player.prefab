@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 8211953094312129977}
   - component: {fileID: 8420357751917199230}
   - component: {fileID: 2159201549498128029}
-  - component: {fileID: 6916077419163235998}
   - component: {fileID: 8851224512138248775}
   - component: {fileID: 8719652624711286092}
   - component: {fileID: 7509582136161291432}
   - component: {fileID: 4681122764526487836}
   - component: {fileID: -217054521437168748}
-  - component: {fileID: 4471508945378028705}
+  - component: {fileID: -1286994921832021609}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -113,33 +112,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!50 &6916077419163235998
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3754684081149943601}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &8851224512138248775
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -219,7 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 8719652624711286092}
-  isLocalPlayer: 0
   isWalking: 0
   speed: 2.5
 --- !u!114 &4681122764526487836
@@ -247,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a4ce3ec0a8529449ce2b7c89563224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4471508945378028705
+--- !u!114 &-1286994921832021609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,7 +227,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3754684081149943601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0
