@@ -1,14 +1,17 @@
 using System.Collections;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class DayNightCycle : MonoBehaviour
+public class DayNightCycle : NetworkBehaviour
 {
     public float timeCycleMinutes = 30; // Duração do ciclo do dia em minutos
     
     private TextMeshProUGUI timeText;
-    
+
+    public TextMeshProUGUI playerCountText;
+
     [Range(1, 4)]
     public int estacao = 1;
 
@@ -70,6 +73,21 @@ public class DayNightCycle : MonoBehaviour
         timeText.text = GetHour();
     }
 
+    void updateCountPlayers()
+    {
+
+        // Atualiza o texto com a quantidade de jogadores online somente se estiver conectado ou tiver criado um servidor
+        if ((NetworkManager.Singleton != null && NetworkManager.Singleton.IsServer))
+        {
+            playerCountText.text = "Players: " + NetworkManager.Singleton.ConnectedClientsList.Count;
+        }
+        else
+        {
+            Destroy(playerCountText);
+        }
+
+    }
+
     // Atualiza a luz global com base no tempo do dia e em fatores sazonais
     void UpdateGlobalLight()
     {
@@ -111,6 +129,6 @@ public class DayNightCycle : MonoBehaviour
 
         // Aplica os modificadores à luz global
         GlobalLight.intensity = daylightIntensityModifier;
-        
+        updateCountPlayers();
     }
 }
