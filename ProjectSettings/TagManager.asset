@@ -7,6 +7,7 @@ TagManager:
   - player_inventory
   - inventory_slot
   - player_nav_inventory
+  - NetworkManager
   layers:
   - Default
   - TransparentFX
