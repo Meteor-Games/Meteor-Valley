@@ -10,14 +10,18 @@ public class WorldController: NetworkBehaviour
 {
     private TextMeshProUGUI timeText;
     public TextMeshProUGUI playerCountText;
-    
-    private NetworkVariable<Vector3Int> _time = new NetworkVariable<Vector3Int>();
-    public NetworkVariable<int> _estacao = new NetworkVariable<int>();
-    public NetworkVariable<float> _daylightIntensityModifier = new NetworkVariable<float>();
 
+    [SerializeField]
+    private NetworkVariable<Vector3Int> _time = new NetworkVariable<Vector3Int>();
+    [SerializeField]
+    public NetworkVariable<int> _estacao = new NetworkVariable<int>();
+    [SerializeField]
+    public NetworkVariable<float> _daylightIntensityModifier = new NetworkVariable<float>();
+    [SerializeField]
     public int _timeCycleMinutes = 0;
 
-    [Range(1, 4)]
+
+    [SerializeField]
     public Light2D GlobalLight;
 
     //public override void OnNetworkSpawn()
@@ -104,7 +108,7 @@ public class WorldController: NetworkBehaviour
         
         while (true)
         {
-            var time = new int[] { _time.Value.x, _time.Value.y, _time.Value.z };
+            var time = new int[] { _time.Value[0], _time.Value[1], _time.Value[2] };
             yield return new WaitForSeconds(secondsPerTick);
 
             time[2] += 1;
@@ -154,11 +158,11 @@ public class WorldController: NetworkBehaviour
     {
         if (_time.Value[0] < 12)
         {
-            SetDaylightIntensityModifierServerRpc((_time.Value.x * 0.0833f) + (_time.Value.y * 0.001f)); // Aumenta a intensidade da luz até meio-dia
+            SetDaylightIntensityModifierServerRpc((_time.Value[0] * 0.0833f) + (_time.Value[1] * 0.001f)); // Aumenta a intensidade da luz até meio-dia
         }
         else
         {
-            SetDaylightIntensityModifierServerRpc(1f - ((_time.Value.x - 12) * 0.0833f) - (_time.Value.y * 0.001f));
+            SetDaylightIntensityModifierServerRpc(1f - ((_time.Value[0] - 12) * 0.0833f) - (_time.Value[1] * 0.001f));
         }
     }
 
