@@ -1,52 +1,112 @@
+using System;
 using System.Collections;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class DayNightCycle : NetworkBehaviour
-{
-    public float timeCycleMinutes = 30; // Duração do ciclo do dia em minutos
-    
-    private TextMeshProUGUI timeText;
 
+public class WorldController: NetworkBehaviour
+{
+    private TextMeshProUGUI timeText;
     public TextMeshProUGUI playerCountText;
+    
+    private NetworkVariable<Vector3Int> _time = new NetworkVariable<Vector3Int>();
+    public NetworkVariable<int> _estacao = new NetworkVariable<int>();
+    public NetworkVariable<float> _daylightIntensityModifier = new NetworkVariable<float>();
+
+    public int _timeCycleMinutes = 0;
 
     [Range(1, 4)]
-    public int estacao = 1;
-
     public Light2D GlobalLight;
 
-    public int[] time = new int[] { 0, 0, 0 };
-    private float daylightIntensityModifier = 1f; // Modificador de intensidade da luz durante o dia
-    private float temperatureModifier = 1f; // Modificador de cor da luz com base na temperatura (verão = quente, inverno = frio)
+    //public override void OnNetworkSpawn()
+    //{
+    //    base.OnNetworkSpawn();
+    //    //_time.OnValueChanged += OnTimeChangedClientRpc;
+    //    //_estacao.OnValueChanged += SetEstacaoClientRpc;
+    //    //_daylightIntensityModifier.OnValueChanged += SetDaylightIntensityModifierClientRpc;
+    //}
 
-    // Start is called before the first frame update
     void Start()
     {
         timeText = GameObject.Find("TimeView").GetComponent<TextMeshProUGUI>();
+        resetHour();
+        
         UpdateTimeDisplay();
-        StartCoroutine(CountdownRoutine());
+        if(IsServer || IsHost)
+        {
+            StartCoroutine(CountdownRoutine());
+        }
+            
     }
 
-    public void resetHour()
+    private void UpdateServer()
     {
-        time[0] = time[1] = time[2] = 0;
+        UpdateGlobalLight();
+        UpdateCountPlayers();
+    }
+
+    private void UpdateClient()
+    {
+        
+    }
+
+    private void updateTemperature()
+    {
+        var _temperatureModifier = 1f;
+        switch (_estacao.Value)
+        {
+            case 1: // Primavera
+                _temperatureModifier = 1f;
+                GlobalLight.color = Color.Lerp(Color.white, Color.yellow, _temperatureModifier);
+                break;
+            case 2: // Verão
+                _temperatureModifier = 1.2f;
+                GlobalLight.color = Color.Lerp(Color.white, Color.red, _temperatureModifier);
+                break;
+            case 3: // Outono
+                _temperatureModifier = 1.2f;
+                GlobalLight.color = Color.Lerp(Color.white, new Color(1f, 0.5f, 0f), _temperatureModifier); // Laranja
+                break;
+            case 4: // Inverno
+                _temperatureModifier = 0.8f;
+                GlobalLight.color = Color.Lerp(Color.white, Color.blue, _temperatureModifier);
+                break;
+        }
+    }
+
+    private void Update()
+    {
+        if(IsServer || IsHost)
+        {
+            UpdateServer();
+        }
+        else
+        {
+            UpdateClient();
+        }
+        UpdateTimeDisplay();
+        updateTemperature();
+        GlobalLight.intensity = _daylightIntensityModifier.Value;
     }
 
     public string GetHour()
     {
-        return string.Format("{0:00}:{1:00}", time[0], time[1]);
+        return string.Format("{0:00}:{1:00}", _time.Value[0], _time.Value[1]);
     }
 
     // Rotina para incrementar o tempo a cada segundo
     IEnumerator CountdownRoutine()
     {
-        float secondsPerDay = timeCycleMinutes * 60; // Segundos em um dia
+        float secondsPerDay = _timeCycleMinutes * 60; // Segundos em um dia
         float secondsPerTick = secondsPerDay / 24000; // Segundos por "tick" (um tick é a menor unidade de tempo no jogo Minecraft)
+        
         while (true)
         {
+            var time = new int[] { _time.Value.x, _time.Value.y, _time.Value.z };
             yield return new WaitForSeconds(secondsPerTick);
+
             time[2] += 1;
             if (time[2] == 60)
             {
@@ -62,10 +122,11 @@ public class DayNightCycle : NetworkBehaviour
                     }
                 }
             }
-            UpdateTimeDisplay();
-            UpdateGlobalLight();
+            var nt = new Vector3Int();
+            nt.Set(time[0], time[1], time[2]);
+            SetTimeServerRpc(nt);
         }
-    }
+    }   
 
     // Atualiza o texto para exibir o tempo no formato "7:00"
     void UpdateTimeDisplay()
@@ -73,7 +134,7 @@ public class DayNightCycle : NetworkBehaviour
         timeText.text = GetHour();
     }
 
-    void updateCountPlayers()
+    void UpdateCountPlayers()
     {
 
         // Atualiza o texto com a quantidade de jogadores online somente se estiver conectado ou tiver criado um servidor
@@ -91,44 +152,57 @@ public class DayNightCycle : NetworkBehaviour
     // Atualiza a luz global com base no tempo do dia e em fatores sazonais
     void UpdateGlobalLight()
     {
-        // Ajusta a intensidade da luz com base na hora do dia
-        if (time[0] < 12) // Manhã
+        if (_time.Value[0] < 12)
         {
-            daylightIntensityModifier = (time[0] * 0.0833f) + (time[1] * 0.001f); // Aumenta a intensidade da luz até meio-dia
+            SetDaylightIntensityModifierServerRpc((_time.Value.x * 0.0833f) + (_time.Value.y * 0.001f)); // Aumenta a intensidade da luz até meio-dia
         }
-        else // Tarde e Noite
+        else
         {
-            daylightIntensityModifier = 1f - ((time[0] - 12) * 0.0833f) - (time[1] * 0.001f); // Diminui a intensidade da luz após o meio-dia
+            SetDaylightIntensityModifierServerRpc(1f - ((_time.Value.x - 12) * 0.0833f) - (_time.Value.y * 0.001f));
         }
+    }
 
-        // Ajusta a cor da luz com base na estação do ano
-        // Aqui você pode implementar lógica para ajustar a temperatura da luz com base na estação do ano
-        // Por exemplo, cores mais quentes para o verão e cores mais frias para o inverno
-        // Vou definir um exemplo simples aqui:
+    public void resetHour()
+    {
+        _time.Value.Set(0, 0, 0);
+        this.SetTimeServerRpc(_time.Value);
+    }
 
-        // Estamos considerando que o ano é dividido em 4 estações (3 meses cada)
-        switch (estacao)
-        {
-            case 1: // Primavera
-                //GlobalLight.color = Color.white * temperatureModifier; // Multiplica a cor atual pela temperatura modificada
-                GlobalLight.color = Color.Lerp(Color.white, Color.yellow, temperatureModifier);
-                break;
-            case 2: // Verão
-                temperatureModifier = 1.2f; // Aumenta a temperatura da cor (quente)
-                GlobalLight.color = Color.Lerp(Color.white, Color.red, temperatureModifier);
-                break;
-            case 3: // Outono
-                temperatureModifier = 1f; // Cor padrão (neutra)
-                GlobalLight.color = Color.Lerp(Color.white, new Color(1f, 0.5f, 0f), temperatureModifier); // Laranja
-                break;
-            case 4: // Inverno
-                temperatureModifier = 0.8f; // Reduz a temperatura da cor (fria)
-                GlobalLight.color = Color.Lerp(Color.white, Color.blue, temperatureModifier);
-                break;
-        }
+    [ServerRpc]
+    private void SetTimeServerRpc(Vector3Int time)
+    {
+        _time.Value = time;
+    }
 
-        // Aplica os modificadores à luz global
-        GlobalLight.intensity = daylightIntensityModifier;
-        updateCountPlayers();
+    [ServerRpc]
+    private void SetEstacaoServerRpc(int estacao)
+    {
+        _estacao.Value = estacao;
+    }
+
+
+    [ServerRpc]
+    private void SetDaylightIntensityModifierServerRpc(float daylightIntensityModifier)
+    {
+        _daylightIntensityModifier.Value = daylightIntensityModifier;
+    }
+
+
+    [ClientRpc]
+    private void SetEstacaoClientRpc(int previousValue, int estacao)
+    {
+        _estacao.Value = estacao;
+    }
+
+    [ClientRpc]
+    private void SetDaylightIntensityModifierClientRpc(float previousValue, float daylightIntensityModifier)
+    {
+        _daylightIntensityModifier.Value = daylightIntensityModifier;
+    }
+
+    [ClientRpc]
+    public void OnTimeChangedClientRpc(Vector3Int previousValue, Vector3Int newValue)
+    {
+        _time.Value = newValue;
     }
 }
