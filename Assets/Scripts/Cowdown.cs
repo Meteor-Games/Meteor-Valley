@@ -34,6 +34,7 @@ public class WorldController: NetworkBehaviour
 
     void Start()
     {
+        GlobalLight.intensity = 1f;
         timeText = GameObject.Find("TimeView").GetComponent<TextMeshProUGUI>();
         resetHour();
         
