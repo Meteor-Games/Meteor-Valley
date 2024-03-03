@@ -1,5 +1,4 @@
 using Unity.Netcode;
-using UnityEngine;
 
 [System.Serializable]
 public enum EntityType
@@ -35,7 +34,7 @@ public class EntityData : INetworkSerializable
     public float weightCapacity;
 
     // Atributos comuns a todas as entidades
-    public int health = 100;
+    public int health = 101;
     public int maxHealth = 100;
     public int mana = 100;
     public int maxMana = 100;

@@ -5,19 +5,12 @@ using UnityEngine;
 public class Entity : NetworkBehaviour
 {
     // Declaração de NetworkVariable para sincronizar o EntityData
-    public NetworkVariable<EntityData> entityData = new NetworkVariable<EntityData>();
+    public NetworkVariable<EntityData> entityData = new(new EntityData());
 
     private void Start()
     {
         if (IsLocalPlayer)
         {
-            // Inicialize o EntityData se ainda não estiver inicializado
-            if (entityData.Value == null)
-            {
-                entityData.Value = new EntityData();
-            }
-
-            // Inicialize o tempo da última regeneração localmente
             entityData.Value.lastRegenTime = Time.time;
         }
     }
@@ -59,10 +52,11 @@ public class Entity : NetworkBehaviour
     public void Move(Vector2 direction)
     {
         // Verifique se o EntityData foi inicializado antes de acessá-lo
-        if (entityData.Value != null)
+        if (entityData.Value == null)
         {
-            transform.Translate(direction * entityData.Value.moveSpeed * Time.deltaTime);
+            return;
         }
+        transform.Translate(entityData.Value.moveSpeed * Time.deltaTime * direction);
     }
 
     private void Regenerate()

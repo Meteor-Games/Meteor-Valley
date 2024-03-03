@@ -8,6 +8,7 @@ TagManager:
   - inventory_slot
   - player_nav_inventory
   - NetworkManager
+  - Mob
   layers:
   - Default
   - TransparentFX

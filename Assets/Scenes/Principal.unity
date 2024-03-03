@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 344869322}
   - component: {fileID: 344869324}
   - component: {fileID: 344869323}
+  - component: {fileID: 344869325}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -51972,6 +51973,28 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!195 &344869325
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344869321}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 47
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 130
+  m_BaseOffset: 65
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &426476905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67515,13 +67538,17 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 2951354610
       objectReference: {fileID: 0}
+    - target: {fileID: -3671891851622923992, guid: d96f36aadb9112a408b2d39c441abbb4, type: 3}
+      propertyPath: MAX_RANGE
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 906653971599544536, guid: d96f36aadb9112a408b2d39c441abbb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.180084
+      value: -5.95
       objectReference: {fileID: 0}
     - target: {fileID: 906653971599544536, guid: d96f36aadb9112a408b2d39c441abbb4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 55.23439
+      value: 7.68
       objectReference: {fileID: 0}
     - target: {fileID: 906653971599544536, guid: d96f36aadb9112a408b2d39c441abbb4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -67558,6 +67585,10 @@ PrefabInstance:
     - target: {fileID: 1329139056757702395, guid: d96f36aadb9112a408b2d39c441abbb4, type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670790304823685200, guid: d96f36aadb9112a408b2d39c441abbb4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3854973082448620330, guid: d96f36aadb9112a408b2d39c441abbb4, type: 3}
       propertyPath: m_Name

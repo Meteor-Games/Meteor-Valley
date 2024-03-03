@@ -170,7 +170,7 @@ public class WorldController: NetworkBehaviour
     public void resetHour()
     {
         _time.Value.Set(0, 0, 0);
-        this.SetTimeServerRpc(_time.Value);
+        //this.SetTimeServerRpc(_time.Value);
     }
 
     [ServerRpc]

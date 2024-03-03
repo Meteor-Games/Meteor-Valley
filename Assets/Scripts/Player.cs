@@ -40,7 +40,7 @@ public class PlayerMovement : Entity
         if (isWalking)
         {
             var move = new Vector3(input_x, input_y, 0).normalized;
-            transform.position += move * entityData.Value.moveSpeed * Time.deltaTime;
+            transform.position += entityData.Value.moveSpeed * Time.deltaTime * move;
             playerAnimator.SetFloat("input_x", input_x);
             playerAnimator.SetFloat("input_y", input_y);
         }
