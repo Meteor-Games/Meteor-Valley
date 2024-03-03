@@ -284,3 +284,5 @@ MonoBehaviour:
   rb: {fileID: 1329139056757702395}
   MAX_RANGE: 10
   backwardDistance: 0.5
+  distanceToMaintain: 2
+  isWithinMaintainDistance: 0
