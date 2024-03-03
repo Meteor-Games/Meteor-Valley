@@ -4,7 +4,8 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.Windows;
 using Unity.Netcode;
-public class PlayerMovement : NetworkBehaviour 
+
+public class PlayerMovement : Entity 
 {
     public Animator playerAnimator;
     float input_x = 0;
@@ -13,8 +14,6 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField]
     private bool isWalking = false;
 
-    [Range(0,15f)]
-    public float speed = 2.5f;
     private void Start()
     {
 
@@ -41,7 +40,7 @@ public class PlayerMovement : NetworkBehaviour
         if (isWalking)
         {
             var move = new Vector3(input_x, input_y, 0).normalized;
-            transform.position += move * speed * Time.deltaTime;
+            transform.position += move * entityData.Value.moveSpeed * Time.deltaTime;
             playerAnimator.SetFloat("input_x", input_x);
             playerAnimator.SetFloat("input_y", input_y);
         }
