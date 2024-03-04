@@ -2,8 +2,10 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
+[System.Serializable]
 public class Entity : NetworkBehaviour
 {
+
     // Declaração de NetworkVariable para sincronizar o EntityData
     public NetworkVariable<EntityData> entityData = new(new EntityData());
 
