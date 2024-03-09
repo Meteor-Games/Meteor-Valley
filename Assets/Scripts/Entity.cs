@@ -7,7 +7,8 @@ public class Entity : NetworkBehaviour
 {
 
     // Declaração de NetworkVariable para sincronizar o EntityData
-    public NetworkVariable<EntityData> entityData = new(new EntityData());
+    protected NetworkVariable<EntityData> entityData = new(new EntityData());
+    public EntityData entityData_ { get; set; }
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class Entity : NetworkBehaviour
         {
             entityData.Value.lastRegenTime = Time.time;
         }
+        entityData_ = this.entityData.Value;
     }
 
     private void Update()
