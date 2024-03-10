@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Windows;
 using Unity.Netcode;
 
-public class PlayerMovement : Entity 
+public class Player : Entity 
 {
     public Animator playerAnimator;
     float input_x = 0;
@@ -14,25 +14,20 @@ public class PlayerMovement : Entity
     [SerializeField]
     private bool isWalking = false;
 
-    private void Start()
-    {
-
-        isWalking = false;
-    }
+    private new void Start() => isWalking = false;
 
     public override void OnNetworkSpawn()
     {
-        
         if (!IsLocalPlayer)
         {
             Destroy(this);
             return;
         }
-        Debug.Log("is_player");
     }
 
-    private void Update()
+    private new void Update()
     {
+        base.Update();
         input_x = UnityEngine.Input.GetAxisRaw("Horizontal");
         input_y = UnityEngine.Input.GetAxisRaw("Vertical");
         isWalking = (input_x != 0 || input_y != 0);

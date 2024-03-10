@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8851224512138248775}
   - component: {fileID: 8719652624711286092}
   - component: {fileID: 7509582136161291432}
-  - component: {fileID: 4681122764526487836}
   - component: {fileID: -217054521437168748}
   - component: {fileID: -1286994921832021609}
   - component: {fileID: 971736958744629878}
@@ -212,19 +211,6 @@ MonoBehaviour:
     iventory: []
   playerAnimator: {fileID: 8719652624711286092}
   isWalking: 0
---- !u!114 &4681122764526487836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3754684081149943601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a510e7c705067c43b4c4c40bce84df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slots: []
 --- !u!114 &-217054521437168748
 MonoBehaviour:
   m_ObjectHideFlags: 0
