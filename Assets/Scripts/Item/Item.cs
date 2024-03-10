@@ -61,14 +61,5 @@ public class ItemData
 public class Item : MonoBehaviour
 {
     public ItemData data;
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
