@@ -84,7 +84,7 @@ public class EntityMoveAgentAi : MonoBehaviour
                 Vector2 direction = (targetPlayer.transform.position - transform.position).normalized;
 
                 // Move o slime na direção do jogador mais próximo
-                rb.MovePosition(rb.position + Entity.entityData_.moveSpeed * Time.fixedDeltaTime * direction);
+                rb.MovePosition(rb.position + Entity.EntityData.moveSpeed * Time.fixedDeltaTime * direction);
 
                 // Verifica se o mob está muito próximo do jogador
                 if (distanceToPlayer <= backwardDistance)

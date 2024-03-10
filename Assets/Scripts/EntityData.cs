@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 
 [System.Serializable]
@@ -47,10 +48,19 @@ public class EntityData : INetworkSerializable
     public float regenInterval = 1f; // Intervalo de tempo entre cada recuperação de saúde, mana e energia
 
     public float lastRegenTime; // Guarda o tempo da última recuperação de saúde, mana e energia
+    public bool pickItens;
+
+    public List<ItemData> iventory;
+    
+    public EntityData()
+    {
+        iventory = new List<ItemData>();
+    }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
         serializer.SerializeValue(ref entityType);
+        serializer.SerializeValue(ref pickItens);
         serializer.SerializeValue(ref behaviorType);
         serializer.SerializeValue(ref weightCapacity);
         serializer.SerializeValue(ref health);

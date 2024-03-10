@@ -9,6 +9,7 @@ TagManager:
   - player_nav_inventory
   - NetworkManager
   - Mob
+  - ItemManager
   layers:
   - Default
   - TransparentFX

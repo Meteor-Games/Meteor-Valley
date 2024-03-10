@@ -8,18 +8,18 @@ public class Entity : NetworkBehaviour
 
     // Declaração de NetworkVariable para sincronizar o EntityData
     protected NetworkVariable<EntityData> entityData = new(new EntityData());
-    public EntityData entityData_ { get; set; }
+    public EntityData EntityData;
 
-    private void Start()
+    protected void Start()
     {
         if (IsLocalPlayer)
         {
             entityData.Value.lastRegenTime = Time.time;
         }
-        entityData_ = this.entityData.Value;
+        EntityData = this.entityData.Value;
     }
 
-    private void Update()
+    protected void Update()
     {
         if (!IsLocalPlayer)
         {
@@ -34,7 +34,7 @@ public class Entity : NetworkBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    protected void TakeDamage(int damage)
     {
         // Verifique se o EntityData foi inicializado antes de acessá-lo
         if (entityData.Value != null)
@@ -53,7 +53,7 @@ public class Entity : NetworkBehaviour
         NetworkObject.Destroy(gameObject);
     }
 
-    public void Move(Vector2 direction)
+    protected void Move(Vector2 direction)
     {
         // Verifique se o EntityData foi inicializado antes de acessá-lo
         if (entityData.Value == null)
@@ -63,7 +63,7 @@ public class Entity : NetworkBehaviour
         transform.Translate(entityData.Value.moveSpeed * Time.deltaTime * direction);
     }
 
-    private void Regenerate()
+    protected void Regenerate()
     {
         // Verifique se o EntityData foi inicializado antes de acessá-lo
         if (entityData.Value != null)

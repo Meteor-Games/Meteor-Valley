@@ -18,8 +18,6 @@ GameObject:
   - component: {fileID: 5222832079104604850}
   - component: {fileID: 4724936221954106276}
   - component: {fileID: 823892025899271663}
-  - component: {fileID: 6251447227594264124}
-  - component: {fileID: -2818482049295197711}
   m_Layer: 0
   m_Name: goblin
   m_TagString: Untagged
@@ -242,23 +240,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00fb8f6cc2512842afbe2863bce8a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityData:
-    m_InternalValue:
-      entityType: 0
-      behaviorType: 1
-      weightCapacity: 0
-      health: 101
-      maxHealth: 100
-      mana: 100
-      maxMana: 100
-      energy: 100
-      maxEnergy: 100
-      moveSpeed: 5
-      healthRegenAmount: 2
-      manaRegenAmount: 2
-      energyRegenAmount: 2
-      regenInterval: 1
-      lastRegenTime: 0
+  EntityData:
+    entityType: 0
+    behaviorType: 0
+    weightCapacity: 0
+    health: 100
+    maxHealth: 100
+    mana: 100
+    maxMana: 100
+    energy: 100
+    maxEnergy: 100
+    moveSpeed: 5
+    healthRegenAmount: 2
+    manaRegenAmount: 2
+    energyRegenAmount: 2
+    regenInterval: 1
+    lastRegenTime: 0
+    pickItens: 0
+    iventory: []
 --- !u!114 &4724936221954106276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,38 +297,3 @@ NavMeshAgent:
   m_BaseOffset: 0.28125
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!95 &6251447227594264124
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8980532480113550533}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-2818482049295197711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8980532480113550533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 6251447227594264124}

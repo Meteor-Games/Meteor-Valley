@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 122412902
+  GlobalObjectIdHash: 1533478265
   InScenePlacedSourceGlobalObjectIdHash: 1176094303
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -192,23 +192,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ec4f8c48db02048ba735b3f601768e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityData:
-    m_InternalValue:
-      entityType: 2
-      behaviorType: 2
-      weightCapacity: 1
-      health: 100
-      maxHealth: 100
-      mana: 100
-      maxMana: 100
-      energy: 100
-      maxEnergy: 100
-      moveSpeed: 5
-      healthRegenAmount: 2
-      manaRegenAmount: 2
-      energyRegenAmount: 2
-      regenInterval: 1
-      lastRegenTime: 0
+  EntityData:
+    entityType: 0
+    behaviorType: 0
+    weightCapacity: 0
+    health: 100
+    maxHealth: 100
+    mana: 100
+    maxMana: 100
+    energy: 100
+    maxEnergy: 100
+    moveSpeed: 5
+    healthRegenAmount: 2
+    manaRegenAmount: 2
+    energyRegenAmount: 2
+    regenInterval: 1
+    lastRegenTime: 0
+    pickItens: 1
+    iventory: []
   playerAnimator: {fileID: 8719652624711286092}
   isWalking: 0
 --- !u!114 &4681122764526487836

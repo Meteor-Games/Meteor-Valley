@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8470430805022706510}
   - component: {fileID: 1672629842985697627}
   - component: {fileID: 1289179002774876254}
-  - component: {fileID: 5303613052546079315}
   - component: {fileID: 7151928983751790881}
+  - component: {fileID: 6678214088948188045}
   - component: {fileID: -3671891851622923992}
   m_Layer: 0
   m_Name: Slime
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2951354610
+  GlobalObjectIdHash: 3576173392
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -218,35 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5303613052546079315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3854973082448620330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a00fb8f6cc2512842afbe2863bce8a71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityData:
-    m_InternalValue:
-      entityType: 0
-      behaviorType: 0
-      weightCapacity: 0
-      health: 100
-      maxHealth: 100
-      mana: 100
-      maxMana: 100
-      energy: 100
-      maxEnergy: 100
-      moveSpeed: 2
-      healthRegenAmount: 2
-      manaRegenAmount: 2
-      energyRegenAmount: 2
-      regenInterval: 1
-      lastRegenTime: 0
 --- !u!195 &7151928983751790881
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -269,6 +240,36 @@ NavMeshAgent:
   m_BaseOffset: 0.34375
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6678214088948188045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3854973082448620330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12528a17e2f0f76448a6483f231a3853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntityData:
+    entityType: 0
+    behaviorType: 0
+    weightCapacity: 0
+    health: 100
+    maxHealth: 100
+    mana: 100
+    maxMana: 100
+    energy: 100
+    maxEnergy: 100
+    moveSpeed: 5
+    healthRegenAmount: 2
+    manaRegenAmount: 2
+    energyRegenAmount: 2
+    regenInterval: 1
+    lastRegenTime: 0
+    pickItens: 1
+    iventory: []
 --- !u!114 &-3671891851622923992
 MonoBehaviour:
   m_ObjectHideFlags: 0
