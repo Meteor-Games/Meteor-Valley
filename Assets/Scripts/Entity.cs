@@ -1,12 +1,14 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 [System.Serializable]
 public class Entity : NetworkBehaviour
 {
 
     // Declaração de NetworkVariable para sincronizar o EntityData
+    protected EntityData DefautEntityData;
     protected NetworkVariable<EntityData> entityData = new(new EntityData());
     public EntityData EntityData;
 
@@ -17,7 +19,17 @@ public class Entity : NetworkBehaviour
             entityData.Value.lastRegenTime = Time.time;
         }
         EntityData = this.entityData.Value;
+        DefautEntityData = EntityData.Clone();
     }
+
+    public void ApplyEffects()
+    {
+        EntityData.iventory.ForEach(item =>
+        {
+            item.effects.ForEach(effect => effect.ApplyEffect(this));
+        });
+    }
+
 
     protected void Update()
     {
@@ -75,5 +87,25 @@ public class Entity : NetworkBehaviour
             entityData.Value.energy += entityData.Value.energyRegenAmount;
             entityData.Value.energy = Mathf.Clamp(entityData.Value.energy, 0, entityData.Value.maxEnergy);
         }
+    }
+
+    protected void weightRecalc()
+    {
+        var weight = 0f;
+        foreach (ItemData item in this.EntityData.iventory)
+        {
+            weight += (float)item.weight;
+        }
+        this.EntityData.weight = weight;
+    }
+
+    protected float getSpeed()
+    {
+        var speed = 0f;
+        if ((this.EntityData.weightCapacity - this.EntityData.weight) < 0)
+        {
+            speed -= 1;
+        }
+        return speed;
     }
 }

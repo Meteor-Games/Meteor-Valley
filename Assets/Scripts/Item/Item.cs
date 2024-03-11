@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using System;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public enum EquipSlot
@@ -29,32 +30,41 @@ public enum RarityType
 }
 
 [System.Serializable]
-public class BuffDebuff
-{
-    public string name;
-    public int value;
-
-    // Função para aplicar o buff/debuff a uma entidade (GameObject)
-    public virtual void ApplyEntity(GameObject entity)
-    {
-        //Entity data = entity.GetComponent<Entity>();
-        // Implementação padrão (vazia)
-        // Subclasses podem sobrescrever esta função para fornecer um comportamento específico
-    }
-}
-
-[System.Serializable]
 public class ItemData
 {
     public int ID;
     public string itemName;
     public float weight;
-    public List<BuffDebuff> buffs;
-    public List<BuffDebuff> debuffs;
+    public List<EntityEffect> effects;
     public RarityType rarity;
     public int defaultSellValue;
     public int defaultBuyValue;
     public EquipSlot equipSlot;
+    public ItemData()
+    {
+        effects = new();
+    }
+    public ItemData Clone()
+    {
+        ItemData clone = new()
+        {
+            ID = this.ID,
+            itemName = this.itemName,
+            weight = this.weight,
+            rarity = this.rarity,
+            defaultSellValue = this.defaultSellValue,
+            defaultBuyValue = this.defaultBuyValue,
+            equipSlot = this.equipSlot,
+            // Clonando a lista de buffs
+            effects = new List<EntityEffect>()
+        };
+        foreach (EntityEffect effect in this.effects)
+        {
+            clone.effects.Add(effect);
+        }
+
+        return clone;
+    }
 }
 
 [System.Serializable]

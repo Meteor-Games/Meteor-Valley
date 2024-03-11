@@ -10,6 +10,7 @@ TagManager:
   - NetworkManager
   - Mob
   - ItemManager
+  - Buff
   layers:
   - Default
   - TransparentFX

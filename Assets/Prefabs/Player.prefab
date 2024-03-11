@@ -192,9 +192,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityData:
-    entityType: 0
-    behaviorType: 0
-    weightCapacity: 0
+    entityType: 2
+    behaviorType: 2
+    weightCapacity: 100
+    weight: 0
     health: 100
     maxHealth: 100
     mana: 100

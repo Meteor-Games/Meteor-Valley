@@ -11,17 +11,11 @@ public class RingSpeed: MonoBehaviour
         data = this.GetComponent<Item>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Nenhuma ação necessária no Update()
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        var entity = collision.gameObject.GetComponent<Entity>();
-        if (entity != null)
+        if (collision.gameObject.TryGetComponent<Entity>(out var entity))
         {
             if (!entity.EntityData.pickItens)
             {
@@ -32,6 +26,7 @@ public class RingSpeed: MonoBehaviour
             {
                 // Clona o objeto e adiciona ao inventário do jogador
                 entity.EntityData.iventory.Add(data.data);
+                entity.ApplyEffects();
             }
             else
             {

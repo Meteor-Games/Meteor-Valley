@@ -138,8 +138,8 @@ MonoBehaviour:
     ID: 1
     itemName: speed
     weight: 0
-    buffs: []
-    debuffs: []
+    effects:
+    - {fileID: 1792589052871416818, guid: 02104ae14f28e9c4e80432c06e361a4a, type: 3}
     rarity: 0
     defaultSellValue: 0
     defaultBuyValue: 0
