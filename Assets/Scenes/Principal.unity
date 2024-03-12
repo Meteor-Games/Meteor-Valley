@@ -66786,7 +66786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 26.3644, y: -0.5488281}
+  m_AnchoredPosition: {x: 26.364395, y: -0.5488281}
   m_SizeDelta: {x: 35.3267, y: 55.81378}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1185490310823719837
@@ -67378,10 +67378,10 @@ Canvas:
   m_GameObject: {fileID: 6152265372920463743}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 6903007277362345250}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -67390,7 +67390,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!222 &4323400914792286210
 CanvasRenderer:
@@ -67452,7 +67452,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!1 &4640269075318284863
 GameObject:
   m_ObjectHideFlags: 0
@@ -67980,7 +67980,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.54, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8901729062086504720}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &7561521456778468188
@@ -68342,7 +68343,7 @@ RectTransform:
   m_GameObject: {fileID: 6152265372920463743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.94625, y: 0.94625, z: 0.94625}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8840553201579581769}
@@ -68350,13 +68351,13 @@ RectTransform:
   - {fileID: 7781715863288993660}
   - {fileID: 2484332525705555334}
   - {fileID: 7561521456778468188}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 7345718732203873121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 378.5, y: 175.5}
-  m_SizeDelta: {x: 800, y: 370.9379}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!224 &8917660604968384958
 RectTransform:
   m_ObjectHideFlags: 0
@@ -68484,7 +68485,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1000661166}
   - {fileID: 7345718732203873121}
-  - {fileID: 8901729062086504720}
   - {fileID: 1732847246}
   - {fileID: 1698048761}
   - {fileID: 464660581}
