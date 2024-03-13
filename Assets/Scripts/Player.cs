@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
-using UnityEngine.Windows;
-using Unity.Netcode;
+
 
 public class Player : Entity 
 {

@@ -1,7 +1,6 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [System.Serializable]
 public class Entity : NetworkBehaviour
@@ -24,10 +23,17 @@ public class Entity : NetworkBehaviour
 
     public void ApplyEffects()
     {
-        EntityData.iventory.ForEach(item =>
+        foreach (ItemSlot slotch in EntityData.inventory.GetSlots())
         {
-            item.effects.ForEach(effect => effect.ApplyEffect(this));
-        });
+            if (!slotch.IsEmpty())
+            {
+                slotch.GetItem().effects.ForEach(effect =>
+                {
+                    effect.ApplyEffect(this);
+                });
+            }
+        }
+        
     }
 
 
@@ -91,12 +97,7 @@ public class Entity : NetworkBehaviour
 
     protected void weightRecalc()
     {
-        var weight = 0f;
-        foreach (ItemData item in this.EntityData.iventory)
-        {
-            weight += (float)item.weight;
-        }
-        this.EntityData.weight = weight;
+        this.EntityData.weight = this.EntityData.inventory.weight;
     }
 
     protected float getSpeed()

@@ -52,11 +52,13 @@ public class EntityData : INetworkSerializable
 
     public float lastRegenTime; // Guarda o tempo da última recuperação de saúde, mana e energia
     public bool pickItens;
-    public List<ItemData> iventory;
-    
+    public Inventory inventory;
+    public Inventory equipment;
+
     public EntityData()
     {
-        iventory = new List<ItemData>();
+        this.inventory = new(27);
+        this.equipment = new(8);
     }
 
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -101,11 +103,9 @@ public class EntityData : INetworkSerializable
         clone.lastRegenTime = this.lastRegenTime;
         clone.pickItens = this.pickItens;
 
-        // Clonando a lista de inventory
-        clone.iventory = new List<ItemData>();
-        foreach (ItemData item in this.iventory)
+        foreach (ItemSlot slotch in this.inventory.GetSlots())
         {
-            clone.iventory.Add(item.Clone());
+            clone.inventory.AddItem(slotch.GetItem(), slotch.GetQuantity());
         }
 
         return clone;

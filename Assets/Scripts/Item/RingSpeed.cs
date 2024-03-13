@@ -22,23 +22,14 @@ public class RingSpeed: MonoBehaviour
                 return;
             }
 
-            if(entity.EntityData.iventory != null)
+            var ret = entity.EntityData.inventory.AddItem(data.data.Clone(), 1);
+            if (ret == true)
             {
-                // Clona o objeto e adiciona ao inventário do jogador
-                entity.EntityData.iventory.Add(data.data);
                 entity.ApplyEffects();
+                // Remove o objeto do chão
+                Destroy(this.gameObject);
             }
-            else
-            {
-                entity.EntityData.iventory = new()
-                {
-                    // Clona o objeto e adiciona ao inventário do jogador
-                    data.data
-                };
-            }
-          
-            // Remove o objeto do chão
-            Destroy(this.gameObject);
+            
         }
     }
 }

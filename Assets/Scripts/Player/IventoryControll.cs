@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Iventory : MonoBehaviour
+public class IventoryControll : MonoBehaviour
 {
     public GameObject[] slots;
 

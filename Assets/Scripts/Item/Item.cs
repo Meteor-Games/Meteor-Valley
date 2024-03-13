@@ -32,7 +32,7 @@ public enum RarityType
 [System.Serializable]
 public class ItemData
 {
-    public int ID;
+    public int ID = -1;
     public string itemName;
     public float weight;
     public List<EntityEffect> effects;
@@ -40,6 +40,7 @@ public class ItemData
     public int defaultSellValue;
     public int defaultBuyValue;
     public EquipSlot equipSlot;
+    public float maxStack = 1;
     public ItemData()
     {
         effects = new();
@@ -71,5 +72,4 @@ public class ItemData
 public class Item : MonoBehaviour
 {
     public ItemData data;
-
 }

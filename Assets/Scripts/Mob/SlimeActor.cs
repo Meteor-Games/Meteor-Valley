@@ -8,17 +8,13 @@ public class SlimeActor : Entity
 
     public float scaleMulti = 0.1f;
 
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         base.Update();
         // Calcula a escala com base na quantidade de itens no inventário
-        float scaleMultiplier = 1f + ((float)this.EntityData.iventory.Count * scaleMulti);
+        float scaleMultiplier = 1f + ((float)this.EntityData.inventory.GetSlots().Count * scaleMulti);
         Vector3 newScale = Vector3.one * scaleMultiplier;
 
         // Define a nova escala do objeto
