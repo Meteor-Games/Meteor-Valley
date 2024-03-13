@@ -8,6 +8,11 @@ public class SlimeActor : Entity
 
     public float scaleMulti = 0.1f;
 
+    private void Start()
+    {
+        base.Start();
+        this.EntityData.pickItens = true;
+    }
 
     // Update is called once per frame
     void Update()

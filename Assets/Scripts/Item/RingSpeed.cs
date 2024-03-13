@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RingSpeed: MonoBehaviour
+public class RingSpeed: Item
 {
-    public Item data;
+    //public Item data;
     // Start is called before the first frame update
-    void Start()
-    {
-        data = this.GetComponent<Item>();
-    }
+    //void Start()
+    //{
+    //    //data = this.GetComponent<Item>();
+    //}
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -22,7 +22,7 @@ public class RingSpeed: MonoBehaviour
                 return;
             }
 
-            var ret = entity.EntityData.inventory.AddItem(data.data.Clone(), 1);
+            var ret = entity.EntityData.inventory.AddItem(data.Clone(), 1);
             if (ret == true)
             {
                 entity.ApplyEffects();
